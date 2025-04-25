@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --primary: #fff;
+    --danger: #e53935;
+    --bg: #f4f6f9;
+    --white: #fff;
+    --letras:#b4743c;
+    --text: #333;
+    --radius: 20px;
+    --shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+}
+
+.sidebar {
+    width: 270px;
+    background: var(--primary);
+    color: var(--letras);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    font-size: 22px;
+    padding: 30px;
+}
+
+.sidebar nav a {
+    display: block;
+    color: var(--letras);
+    text-decoration: none;
+    margin: 15px 0;
+    font-weight: 500;
+    transition: all 300ms;
+    border-radius: 4px;
+}
+
+.sidebar a { 
+    list-style: none;
+    padding: 10px;
+    transition: all 300ms;
+}
+
+.sidebar a:hover { 
+    background: #b4743c;
+    color: #fff;
+}
+
+.main {
+    flex: 1;
+    padding: 30px;
+}
+
+h1 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.inputs {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.inputs button { 
+    width: 20%;
+}
+
+#nombre { 
+    width: 50%;
+}
+
+input, select, button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: var(--radius);
+    font-size: 14px;
+}
+
+select { 
+    width: 100%;
+}
+
+button {
+    background: var(--primary);
+    color: var(--letras);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background:#b4743c;
+}
+
+#search {
+    margin: 10px 0;
+    width: 100%;
+}
+
+.filtros {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    background-color: #fff;
+    border-radius: var(--radius);
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: var(--primary);
+    color: var(--letras);
+}
+
+table td button {
+    width: 100px;
+    padding: 8px;
+    background-color: var(--primary);
+    color: var(--letras);
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+table td button:hover {
+    background: #b4743c;
+    color: #fff;
+}
+
+.chart-container {
+    background: var(--white);
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+
+/* li input[name="nombre"] {
+    width: 60%; 
+} */
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        padding: 15px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    input, select, button {
+        width: 100%;
+    }
+
+    .main {
+        width: 100%;
+    }
+}

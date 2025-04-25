@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de Inventario</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="sidebar">
+    <img src="logo.png" alt="" width="220px">
+    <hr>
+    <nav>
+     <a href="#">Inicio</a>
+     <a href="#">Productos</a>
+     <a href="#">Graficos</a>
+    </nav>
+  </div>
+ 
+  <div class="main">
+    <h1>Gestión de Productos</h1>
+    <hr>
+    <h2>Creación de Productos</h2>
+    <div class="inputs">
+      <input id="nombre" placeholder="Nombre del producto">
+      <input id="cantidad" type="number" placeholder="Cantidad">
+      <select id="categoria">
+        <option value="">Categoría</option>
+        <option>Electrónica</option>
+        <option>Ropa</option>
+        <option>Alimentos</option>
+        <option>Otros</option>
+      </select>
+      <button onclick="agregar()">Agregar</button>
+    </div>
+    <hr>
+
+    <div class="filtros">
+      <input id="search" placeholder="Buscar producto..." oninput="mostrar()">
+      <select id="filtroCategoria" onchange="mostrar()">
+        <option value="">Todas las categorías</option>
+        <option>Electrónica</option>
+        <option>Ropa</option>
+        <option>Alimentos</option>
+        <option>Otros</option>
+      </select>
+    </div>
+
+    <h2>Productos</h2>
+    <table id="tablaProductos">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Categoría</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="lista"></tbody>
+    </table>
+
+    <hr>
+
+    <div class="chart-container">
+      <canvas id="stockChart"></canvas>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
