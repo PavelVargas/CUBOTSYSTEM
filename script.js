@@ -32,32 +32,46 @@ function agregar() {
 
 function editar(id) {
   const tr = document.querySelector(`#producto-${id}`);
-  const inputs = tr.querySelectorAll('input, select');
   const editarBtn = tr.querySelector('.editar-btn');
-  
-  // Si ya están editando, habilitamos los inputs y el botón
-  const editable = inputs[0].disabled;
-  
-  inputs.forEach(input => input.disabled = !editable);
-  
-  if (editable) {
-    // Si estaba deshabilitado, habilitamos los inputs para editar
-    editarBtn.textContent = 'Guardar';
-  } else {
-    // Si estaba habilitado, guardamos los cambios
-    const nombre = tr.querySelector('input[name="nombre"]').value;
-    const cantidad = parseInt(tr.querySelector('input[name="cantidad"]').value);
-    const categoria = tr.querySelector('select[name="categoria"]').value;
-    
-    const producto = productos.find(p => p.id === id);
-    producto.nombre = nombre;
-    producto.cantidad = cantidad;
-    producto.categoria = categoria;
-    
-    guardar();
-    editarBtn.textContent = 'Editar';
-    actualizarGrafico();
+
+  const producto = productos.find(p => p.id === id);
+
+  if (editarBtn.textContent === 'Editar') {
+    tr.innerHTML = `
+      <td><input type="text" name="nombre" value="${producto.nombre}" style="width: 100%;"></td>
+      <td><input type="number" name="cantidad" value="${producto.cantidad}" style="width: 100%;"></td>
+      <td>
+        <select name="categoria" style="width: 100%;">
+          <option ${producto.categoria === "Electrónica" ? "selected" : ""}>Electrónica</option>
+          <option ${producto.categoria === "Ropa" ? "selected" : ""}>Ropa</option>
+          <option ${producto.categoria === "Alimentos" ? "selected" : ""}>Alimentos</option>
+          <option ${producto.categoria === "Otros" ? "selected" : ""}>Otros</option>
+        </select>
+      </td>
+      <td>
+        <div class="buttons-container">
+          <button class="editar-btn" onclick="guardarEdicion(${id})">Guardar</button>
+          <button onclick="eliminar(${id})">Eliminar</button>
+        </div>
+      </td>
+    `;
   }
+}
+
+function guardarEdicion(id) {
+  const tr = document.querySelector(`#producto-${id}`);
+  const nombre = tr.querySelector('input[name="nombre"]').value;
+  const cantidad = parseInt(tr.querySelector('input[name="cantidad"]').value);
+  const categoria = tr.querySelector('select[name="categoria"]').value;
+
+  const producto = productos.find(p => p.id === id);
+  producto.nombre = nombre;
+  producto.cantidad = cantidad;
+  producto.categoria = categoria;
+
+  guardar();
+  mostrar();
+  actualizarGrafico();
 }
 
 function eliminar(id) {
@@ -82,16 +96,9 @@ function mostrar() {
       const tr = document.createElement("tr");
       tr.id = `producto-${p.id}`;
       tr.innerHTML = `
-        <td><input type="text" name="nombre" value="${p.nombre}" style="width: 60%;" disabled></td>
-        <td><input type="number" name="cantidad" value="${p.cantidad}" disabled></td>
-        <td>
-          <select name="categoria" disabled>
-            <option ${p.categoria === "Electrónica" ? "selected" : ""}>Electrónica</option>
-            <option ${p.categoria === "Ropa" ? "selected" : ""}>Ropa</option>
-            <option ${p.categoria === "Alimentos" ? "selected" : ""}>Alimentos</option>
-            <option ${p.categoria === "Otros" ? "selected" : ""}>Otros</option>
-          </select>
-        </td>
+        <td>${p.nombre}</td>
+        <td>${p.cantidad}</td>
+        <td>${p.categoria}</td>
         <td>
           <div class="buttons-container">
             <button class="editar-btn" onclick="editar(${p.id})">Editar</button>
@@ -106,7 +113,7 @@ function mostrar() {
 let chart;
 
 function actualizarGrafico() {
-  const ctx = document.getElementById("stockChart").getContext("2d");
+  const ctx = document.getElementById("graficoStock").getContext("2d");
   const data = productos.reduce((acc, p) => {
     acc[p.nombre] = (acc[p.nombre] || 0) + p.cantidad;
     return acc;

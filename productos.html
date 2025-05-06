@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de Inventario</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="productos.css">
+</head>
+<body>
+
+  <div class="sidebar">
+    <img src="logo.png" alt="" width="190px">
+    <hr>
+    <nav>
+     <a href="index.html">Inicio</a>
+     <a href="productos.html">Productos</a>
+     <a href="#">Graficos</a>
+    </nav>
+  </div>
+ 
+  <div class="main">
+    <h1>Gestión de Productos📦</h1>
+    <hr>
+    <br>
+    <div class="filtros">
+        <input type="checkbox" id="mostrar">
+        <label for="mostrar" id="boton">Crear producto</label>
+        
+        <div class="inputs">
+          <div class="content">
+           <span>📦</span>
+            <h1>Crear producto</h1>
+            <input id="nombre" placeholder="Nombre del producto">
+          <input id="cantidad" type="number" placeholder="Cantidad">
+          <select id="categoria">
+            <option value="">Categoría</option>
+            <option>Electrónica</option>
+            <option>Ropa</option>
+            <option>Alimentos</option>
+            <option>Otros</option>
+          </select>
+          <button onclick="agregar()" id="but">Agregar</button>
+          </div>
+        </div>
+      
+        <input id="search" placeholder="🔍 Buscar producto..." oninput="mostrar()">
+        <select id="filtroCategoria" onchange="mostrar()">
+          <option value="">Todas las categorías</option>
+          <option>Electrónica</option>
+          <option>Ropa</option>
+          <option>Alimentos</option>
+          <option>Otros</option>
+        </select>
+      </div>
+      
+
+    <h2>Productos📋</h2>
+    <table id="tablaProductos">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Categoría</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="lista"></tbody>
+    </table>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
